@@ -50,4 +50,4 @@ it is the only input not checked in. The resulting `main.dol` is the patched exe
 * Addresses are hardcoded for the USA DOL this was reversed from; another revision will need new addresses.
 * Debug output goes through `OSReport`, so watch the Dolphin log to see the link handshake.
 * The game's tile renderer runs in immediate mode, so certain area are fairly slow to render and can cause frame dips.
-* AI was used to generate this README, linker script and Makefile. The rest is human authored.
+* AI was used to generate this README, linker script, DOL patcher python script and Makefile. The rest is human authored.
