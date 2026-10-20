@@ -1,8 +1,7 @@
-# FSA2 — Four Swords Adventures GBA-link patch
+# FSA No GBA — Four Swords Adventures GBA-link patch
 
 A PowerPC code-injection mod for **The Legend of Zelda: Four Swords Adventures** (GameCube).
-It hooks the game's GBA link layer and its GBA screen renderer, so you can play the
-GameCube-only sections without physical GBAs and see the four GBA displays on the TV.
+It hooks the game's GBA link layer and its GBA screen renderer, so you can play without physical GBAs and see the four GBA displays on the TV.
 
 Concretely, the injected code:
 
@@ -13,13 +12,10 @@ Concretely, the injected code:
   without hardware GBAs attached.
 * **Reroutes GBA screen rendering.** `screen_mod.c` re-targets the GBA viewports to larger
   on-screen rectangles (up to four full GBA screens), and pressing **Z** cycles each port's
-  window between reduced (vanilla), full and fully transparent.
+  window between reduced (vanilla), partially and fully transparent.
 * **Patches out the vanilla UI** that gets in the way (corner circles, ranking display, and
   the instructions that inhibit GBA screen rendering) by stubbing or NOP-ing them in
   `entrypoint.c`.
-
-The hooks are installed at the game's `0x801347a4` entrypoint, which branches to `_start` in
-this module. Everything is linked at `0x80060b88`, an unused region of main RAM, by `script.ld`.
 
 ## Layout
 
@@ -51,8 +47,7 @@ it is the only input not checked in. The resulting `main.dol` is the patched exe
 
 ## Notes
 
-* Addresses are hardcoded for the USA/PAL DOL this was reversed from; another revision will
-  need new addresses.
+* Addresses are hardcoded for the USA DOL this was reversed from; another revision will need new addresses.
 * Debug output goes through `OSReport`, so watch the Dolphin log to see the link handshake.
-* This is a research/hobby project — expect rough edges (the "screen of shame" removal, for
-  instance, still causes some flickering).
+* The game's tile renderer runs in immediate mode, so certain area are fairly slow to render and can cause frame dips.
+* AI was used to generate this README, linker script and Makefile. The rest is human authored.
